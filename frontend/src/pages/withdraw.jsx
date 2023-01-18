@@ -6,24 +6,21 @@ function Withdraw() {
   const [show] = React.useState(true);
   const [status] = React.useState("");
   const [withdraw, setWithdraw] = React.useState(0);
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const setUserWithdraw = () => {
-    let newUser = user;
-    newUser.balance = newUser.balance - withdraw;
+    updateUser({ ...user, balance: user.balance - withdraw });
   };
 
   return (
     <MyCard
       bgcolor="blue#7b6767"
-      header="Withdraw"
+      header=<h4>{user.name}'s account</h4>
       status={status}
       body={
         show ? (
           <>
-            Balance
-            <br />
-            {user.balance}
+            <h5>Balance ${user.balance}</h5>
             <br />
             Withdraw
             <br />

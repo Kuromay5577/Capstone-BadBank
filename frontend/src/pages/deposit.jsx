@@ -1,32 +1,24 @@
 import React from "react";
 import MyCard from "../components/card";
 import { useAuth } from "../hooks/useAuth";
-
 function Deposit() {
   const [show] = React.useState(true);
   const [status] = React.useState("");
   const [deposit, setDeposit] = React.useState(0);
-  const { user, setUser } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const setUserDeposit = () => {
-    let newUser = user;
-    newUser[Object.keys(newUser)[0]] =
-      newUser[Object.keys(newUser)[0].balance + { deposit }];
-    setUser(newUser);
+    updateUser({ ...user, balance: user.balance + deposit });
   };
 
   return (
     <MyCard
-      header="Deposit"
+      header=<h4>{user.name}'s account</h4>
       status={status}
       body={
         show ? (
           <>
-            Balance
-            <br />
-            {Object.keys(user).length > 0
-              ? user[Object.keys(user)[0]].balance
-              : "N/A"}
+            <h5>Balance ${user.balance}</h5>
             <br />
             Deposit
             <br />

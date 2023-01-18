@@ -14,7 +14,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children, userData }) => {
   const { storedValue, setStoredValue } = useLocalStorage("user", userData);
-  const { loading, error, getData, postData } = useFetch("users");
+  const { loading, error, getData, postData, updateData } = useFetch("users");
   const [authError, setAuthError] = useState(error);
   const navigate = useNavigate();
 
@@ -24,11 +24,20 @@ export const AuthProvider = ({ children, userData }) => {
 
   const register = useCallback(
     async (_data) => {
-      await postData(_data);
-      setStoredValue(_data);
-      navigate("/dashboard", { replace: true });
+      const finalData = { ..._data, balance: 0 };
+      await postData(finalData);
+      setStoredValue(finalData);
+      navigate("/dashboard/main", { replace: true });
     },
     [navigate, postData, setStoredValue]
+  );
+
+  const updateUser = useCallback(
+    async (_data) => {
+      await updateData(_data);
+      setStoredValue(_data);
+    },
+    [setStoredValue, updateData]
   );
 
   const login = useCallback(
@@ -41,7 +50,7 @@ export const AuthProvider = ({ children, userData }) => {
           });
           if (currentUser) {
             setStoredValue(currentUser[0]);
-            navigate("/dashboard", { replace: true });
+            navigate("/dashboard/main", { replace: true });
           } else {
             setAuthError(error);
           }
@@ -67,12 +76,13 @@ export const AuthProvider = ({ children, userData }) => {
       error: authError,
       loading,
       user: storedValue,
+      updateUser,
       resetError,
       register,
       login,
       logout,
     }),
-    [authError, loading, storedValue, register, login, logout]
+    [authError, loading, storedValue, updateUser, register, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

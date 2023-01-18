@@ -7,7 +7,7 @@ export function HomePage() {
     <MyCard
       bgcolor="primary"
       txtcolor="white"
-      header="Welcome to the Bank"
+      header="Welcome to the Bad Bank"
       title="For all your banking needs."
       body={<img src={Bank} className="img-fluid" alt="Responsive" />}
     />

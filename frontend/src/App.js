@@ -7,14 +7,16 @@ import {
 import LoginPage from "./pages/Login";
 import CreateAccount from "./pages/Register";
 import { HomePage } from "./pages/Home";
+// import { Main } from "./pages/Home";
 import Deposit from "./pages/deposit";
 import Withdraw from "./pages/withdraw";
-import AllData from "./pages/alldata";
+//import AllData from "./pages/alldata";
 //import LogOut from "./pages/logout";
 import { ProtectedLayout } from "./components/ProtectedLayout";
 import { HomeLayout } from "./components/HomeLayout";
 import "./style.css";
 import { AuthLayout } from "./components/AuthLayout.jsx";
+import { Dashboard } from "./pages/main";
 
 // ideally this would be an API call to server to get logged in user data
 
@@ -47,9 +49,9 @@ export const router = createBrowserRouter(
       </Route>
 
       <Route path="/dashboard" element={<ProtectedLayout />}>
-        <Route path="/dashboard/deposit" element={<Deposit />} />
-        <Route path="/dashboard/withdraw" element={<Withdraw />} />
-        <Route path="/dashboard/alldata" element={<AllData />} />
+        <Route path="main" element={<Dashboard />} />
+        <Route path="deposit" element={<Deposit />} />
+        <Route path="withdraw" element={<Withdraw />} />
       </Route>
     </Route>
   )

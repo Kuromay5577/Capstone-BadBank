@@ -47,12 +47,27 @@ const useFetch = (key) => {
       });
   };
 
+  const updateData = async (user) => {
+    setLoading(true);
+    instance
+      .put("/users/" + user.objectId, { balance: user.balance })
+      .then(function (response) {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        setError(error);
+        setLoading(false);
+      });
+  };
+
   return {
     data,
     loading,
     error,
     getData,
     postData,
+    updateData,
   };
 };
 

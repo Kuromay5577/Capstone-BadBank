@@ -1,6 +1,5 @@
 import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { Dashboard } from "../pages/dashboard";
 import { AppBar } from "./AppBar";
 
 export const ProtectedLayout = () => {
@@ -17,7 +16,6 @@ export const ProtectedLayout = () => {
         pages={[
           { label: "Deposit", path: "deposit" },
           { label: "Withdraw", path: "withdraw" },
-          { label: "All Data", path: "alldata" },
         ]}
       />
       {outlet}
