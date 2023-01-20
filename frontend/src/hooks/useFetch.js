@@ -49,6 +49,7 @@ const useFetch = (key) => {
 
   const updateData = async (user) => {
     setLoading(true);
+    //  PUT request using fetch with set headers
     instance
       .put("/users/" + user.objectId, { balance: user.balance })
       .then(function (response) {

@@ -2,13 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import Alert from "@mui/material/Alert";
+import GoogleButton from "react-google-button";
 
 export default function CreateAccount() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading, error, register } = useAuth();
+  const { loading, error, register, googleRegister } = useAuth();
 
   const handleSubmit = (event) => {
     //    alert("Welcome " + name + "! ");
@@ -30,7 +31,7 @@ export default function CreateAccount() {
 
   return (
     <div className="Auth-form-container">
-      {error ? <Alert severity="error">Something went wrong!</Alert> : null}
+      {error ? <Alert severity="error">This is an error alert!</Alert> : null}
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content" style={{ padding: 100 }}>
           <h3 className="Auth-form-title">Sign In</h3>
@@ -40,6 +41,12 @@ export default function CreateAccount() {
               <a href="/login">Log in</a>
             </p>
           </div>
+          <GoogleButton
+            onClick={() => {
+              console.log("Google button clicked");
+              googleRegister();
+            }}
+          />
           <div className="form-group mt-3">
             <label>Full Name</label>
             <input

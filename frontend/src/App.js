@@ -17,6 +17,7 @@ import { HomeLayout } from "./components/HomeLayout";
 import "./style.css";
 import { AuthLayout } from "./components/AuthLayout.jsx";
 import { Dashboard } from "./pages/main";
+// import AllData from "./pages/alldata";
 
 // ideally this would be an API call to server to get logged in user data
 

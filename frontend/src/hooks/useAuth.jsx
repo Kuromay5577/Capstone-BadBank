@@ -9,6 +9,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import useFetch from "./useFetch";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 const AuthContext = createContext();
 
@@ -19,12 +21,26 @@ export const AuthProvider = ({ children, userData }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyh3eLvzSeiARhklrGDnAZeIT_kyfC0bs",
+      authDomain: "badbank-2e860.firebaseapp.com",
+      projectId: "badbank-2e860",
+      storageBucket: "badbank-2e860.appspot.com",
+      messagingSenderId: "974562135218",
+      appId: "1:974562135218:web:ad91c33e1b9710c77ecdab",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  }, []);
+
+  useEffect(() => {
     setAuthError(error);
   }, [error]);
 
   const register = useCallback(
     async (_data) => {
-      const finalData = { ..._data, balance: 0 };
+      const finalData = { ..._data, balance: "user".balance };
       await postData(finalData);
       setStoredValue(finalData);
       navigate("/dashboard/main", { replace: true });
@@ -71,6 +87,61 @@ export const AuthProvider = ({ children, userData }) => {
     setAuthError(null);
   };
 
+  const googleLogin = useCallback(async () => {
+    const auth = firebase.auth();
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        getData()
+          .then((users) => {
+            let currentUser = null;
+            currentUser = users.filter((item) => {
+              return result.user.email === item.email;
+            });
+            if (currentUser) {
+              setStoredValue(currentUser[0]);
+              navigate("/dashboard/main", { replace: true });
+            } else {
+              setAuthError(error);
+            }
+          })
+          .catch((_error) => {
+            setAuthError(_error);
+          });
+      })
+      .catch((_error) => {
+        setAuthError(_error);
+      });
+  }, [error, getData, navigate, setStoredValue]);
+
+  const googleRegister = useCallback(async () => {
+    const auth = firebase.auth();
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+
+    auth
+      .signInWithPopup(provider)
+      .then(async (result) => {
+        const finalData = {
+          name: result.user.displayName,
+          email: result.user.email,
+          password: "google_provider",
+          balance: "user".balance,
+        };
+        await postData(finalData);
+        setStoredValue(finalData);
+        navigate("/dashboard/main", { replace: true });
+      })
+      .catch((_error) => {
+        setAuthError(_error);
+      });
+  }, [navigate, postData, setStoredValue]);
+
   const value = useMemo(
     () => ({
       error: authError,
@@ -81,8 +152,20 @@ export const AuthProvider = ({ children, userData }) => {
       register,
       login,
       logout,
+      googleLogin,
+      googleRegister,
     }),
-    [authError, loading, storedValue, updateUser, register, login, logout]
+    [
+      authError,
+      loading,
+      storedValue,
+      updateUser,
+      register,
+      login,
+      logout,
+      googleLogin,
+      googleRegister,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

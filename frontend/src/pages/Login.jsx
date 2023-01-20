@@ -1,5 +1,6 @@
 import React from "react";
 //import { useContext } from "react";
+import GoogleButton from "react-google-button";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
@@ -7,7 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { error, login } = useAuth();
+  const { error, login, googleLogin } = useAuth();
 
   // let [authMode, setAuthMode] = useState("login");
 
@@ -36,6 +37,12 @@ export default function LoginPage() {
           <div className="text-center">
             Not registered yet? <a href="./register">Create Account</a>
           </div>
+          <GoogleButton
+            onClick={() => {
+              console.log("Google button clicked");
+              googleLogin();
+            }}
+          />
           <div className="form-group mt-3">
             <label>Email address</label>
             <input
