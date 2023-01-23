@@ -34,7 +34,7 @@ export default function CreateAccount() {
       {error ? <Alert severity="error">This is an error alert!</Alert> : null}
       <form className="Auth-form" onSubmit={handleSubmit}>
         <div className="Auth-form-content" style={{ padding: 100 }}>
-          <h3 className="Auth-form-title">Sign In</h3>
+          <h3 className="Auth-form-title">Create Account</h3>
           <div className="text-center">
             Already registered?
             <p className="text-center mt-2">

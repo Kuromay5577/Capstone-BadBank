@@ -33,33 +33,39 @@ const useFetch = (key) => {
   };
 
   const postData = async (user) => {
-    setLoading(true);
-    // POST request using fetch with set headers
-    instance
-      .post("/users", user)
-      .then(function (response) {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        setError(error);
-        setLoading(false);
-      });
+    return new Promise((resolve, reject) => {
+      setLoading(true);
+      // POST request using fetch with set headers
+      instance
+        .post("/users", user)
+        .then(function (response) {
+          resolve(response.data);
+          setLoading(false);
+        })
+        .catch(function (error) {
+          reject(error);
+          setLoading(false);
+        });
+    });
   };
 
   const updateData = async (user) => {
-    setLoading(true);
-    //  PUT request using fetch with set headers
-    instance
-      .put("/users/" + user.objectId, { balance: user.balance })
-      .then(function (response) {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        setError(error);
-        setLoading(false);
-      });
+    return new Promise((resolve, reject) => {
+      setLoading(true);
+      //  PUT request using fetch with set headers
+      instance
+        .put("/users/" + user.objectId, { balance: user.balance })
+        .then(function (response) {
+          setData(response.data);
+          setLoading(false);
+          resolve(response.data);
+        })
+        .catch(function (error) {
+          setError(error);
+          setLoading(false);
+          reject(error);
+        });
+    });
   };
 
   return {

@@ -11,6 +11,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import useFetch from "./useFetch";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+//import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -40,10 +41,14 @@ export const AuthProvider = ({ children, userData }) => {
 
   const register = useCallback(
     async (_data) => {
-      const finalData = { ..._data, balance: "user".balance };
-      await postData(finalData);
-      setStoredValue(finalData);
-      navigate("/dashboard/main", { replace: true });
+      const finalData = { ..._data, balance: 0 };
+      try {
+        const response = await postData(finalData);
+        setStoredValue({ ...finalData, ...response });
+        navigate("/dashboard/main", { replace: true });
+      } catch (error) {
+        setAuthError(error);
+      }
     },
     [navigate, postData, setStoredValue]
   );
