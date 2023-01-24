@@ -36,7 +36,7 @@ export default function LoginPage() {
         <div className="Auth-form-content" style={{ padding: 100 }}>
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="text-center">
-            Not registered yet? <Link href="/register">Create Account</Link>
+            Not registered yet? <Link to="/register">Create Account</Link>
           </div>
           <GoogleButton
             onClick={() => {
