@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import Alert from "@mui/material/Alert";
-import { GoogleButton, Link } from "react-google-button";
+import GoogleButton from "react-google-button";
+import { Link } from "react-router-dom";
 
 export default function CreateAccount() {
   const [name, setName] = useState("");

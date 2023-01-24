@@ -1,8 +1,9 @@
 import React from "react";
 //import { useContext } from "react";
-import { GoogleButton, Link } from "react-google-button";
+import GoogleButton from "react-google-button";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
