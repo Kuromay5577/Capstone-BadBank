@@ -38,7 +38,7 @@ export default function CreateAccount() {
           <div className="text-center">
             Already registered?
             <p className="text-center mt-2">
-              <a href="./login">Log in</a>
+              <a href="./Login">Log in</a>
             </p>
           </div>
           <GoogleButton
