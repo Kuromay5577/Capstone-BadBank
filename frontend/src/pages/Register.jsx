@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import Alert from "@mui/material/Alert";
 import GoogleButton from "react-google-button";
-import { Link } from "react-router-dom";
 
 export default function CreateAccount() {
   const [name, setName] = useState("");
@@ -39,7 +38,7 @@ export default function CreateAccount() {
           <div className="text-center">
             Already registered?
             <p className="text-center mt-2">
-              <Link to="./Login">Log in</Link>
+              <a href="/Login">Log in</a>
             </p>
           </div>
           <GoogleButton
