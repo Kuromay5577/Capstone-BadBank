@@ -3,6 +3,7 @@ import React from "react";
 import GoogleButton from "react-google-button";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ export default function LoginPage() {
         <div className="Auth-form-content" style={{ padding: 100 }}>
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="text-center">
-            Not registered yet? <a href="/register">Create Account</a>
+            Not registered yet? <Link href="/register">Create Account</Link>
           </div>
           <GoogleButton
             onClick={() => {
