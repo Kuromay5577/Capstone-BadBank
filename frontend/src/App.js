@@ -17,10 +17,17 @@ import { HomeLayout } from "./components/HomeLayout";
 import "./style.css";
 import { AuthLayout } from "./components/AuthLayout.jsx";
 import { Dashboard } from "./pages/main";
+import Parse from "parse/dist/parse.min.js";
+
 // import AllData from "./pages/alldata";
 
 // ideally this would be an API call to server to get logged in user data
 
+Parse.initialize(
+  "JZlk1zJsl0Go1oCSz5ibw86OlhpTeN8rGZ7dUZSQ",
+  "H5KLDrursM13MvGCDuKvUpBXUHpkdIkiufhYpw31"
+); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+Parse.serverURL = "https://parseapi.back4app.com/";
 const getUserData = () =>
   new Promise((resolve) =>
     setTimeout(() => {
