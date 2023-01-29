@@ -2,7 +2,8 @@
   "name": "badbank",
   "description": "parse-server for BadBank",
   "scripts": {
-    "start": "parse-server config.json"
+    "start": "parse-server config.json",
+    "test": "echo \"Erro: no test specified\" && exit 1"
   },
   "dependencies": {
     "parse-server": "^3.9.0"
