@@ -3,17 +3,17 @@ name: npm test
 on: [push]
 
 jobs:
+  build:
+    defaults:
+      run:
+      working-directory: backend
+
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node_version: [12.x]
-
-  build:
-    defaults:
-      run:
-      working-directory: backend
 
     steps:
       - uses: actions/checkout@v2
