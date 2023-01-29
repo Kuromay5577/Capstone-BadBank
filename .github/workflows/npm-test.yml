@@ -10,14 +10,17 @@ jobs:
       matrix:
         node_version: [12.x]
 
+  build:
+    defaults:
+      run:
+      working-directory: backend
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
 
         uses: actions/setup-node@v1
-
-        working-directory: backend
 
         with:
           node-version: ${{ matrix.node-version }}
