@@ -2,12 +2,11 @@ name: npm test
 
 on: [push]
 
-jobs:
-  build:
     defaults:
       run:
       working-directory: backend
 
+jobs:
   test:
     runs-on: ubuntu-latest
 
