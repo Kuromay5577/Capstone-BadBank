@@ -2,9 +2,9 @@ name: npm test
 
 on: [push]
 
-    defaults:
-      run:
-      working-directory: backend
+defaults:
+  run:
+    working-directory: backend
 
 jobs:
   test:
